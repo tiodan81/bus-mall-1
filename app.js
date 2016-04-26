@@ -1,5 +1,5 @@
 
-attempt = 25;
+attempt = 5;
 var imgArray = [['bag','jpg'],['banana','jpg'],['boots','jpg'],['breakfast','jpg'],
 ['bubblegum','jpg'],['chair','jpg'],['cthulhu','jpg'],['dog-duck','jpg']['dragon','jpg'],
 ['pen','jpg'],['pet-sweep','jpg'],['scissors','jpg'],['shark','jpg'],['sweep','png'],['tauntaun','jpg']
@@ -19,9 +19,9 @@ function Image(filename, fileext) {
 
 Image.prototype.generatePercentage = function() {
   if (this.displayCounter) {
-    return ((this.clickCounter / this.displayCounter) * 100);
+    return ((this.clickCounter / this.displayCounter) * 100).toFixed(2);
   } else {
-    alert('Sorry.  Undisplayed image.');
+  //  alert('Sorry.  Undisplayed image.');
   }
 };
 
@@ -119,15 +119,39 @@ function selectImg(e) {
       displayThreeImgNew();
     }
     attempts--;
+    if(attempts <= 0 ) {
+      alert('Thank you for your feedback.');
+      attemptButton.style.visibility = 'visible';
+      resultButton.style.visibility = 'visible';
+    } else {
+      displayThreeImgNew();
+    }
   } else {
     alert('Thank you for your feedback.');
-    displayResults();
   }
 }
-var results = document.createElement('ul');
-for (var i = 0; i < allImg.imageArray.length; i++) {
-  var list = document.createElement('li');
-  list.textContent = (allImg.imageArray[i].filename + 'was clicked ' + allImg.imgArray[i].clickCounter + ' times out of a total ' + allImg.imgArray[i].displayCounter + 'times displayed.  Percentage of time clicked on: ' + allImg.imgArray[i].generatePercentage + '.');
-  results.appendChild(list);
+
+function moreAttempts() {
+  attempts += 10;
+  displayThreeImgNew();
+  attemptButton.style.visibilty = 'hidden';
+  resultButton.style.visibilty = 'hidden';
 }
-displayResults.appendChild(results);
+
+function generateResults() {
+  var resultHeader = document.createElement('h1');
+  resultHeader.textContent = 'results';
+  while (bigDiv.firstChild) {
+    bigDiv.removeChild(bigDiv.firstChild);
+  }
+  var results = document.createElement('ul');
+  for (var i = 0; i < allImg.imageArray.length; i++) {
+    var list = document.createElement('li');
+    list.textContent = (allImg.imageArray[i].filename.toLowerCase() + 'was clicked ' + allImg.imageArray[i].clickCounter + ' times out of a total ' + allImg.imageArray[i].displayCounter + 'times displayed.  Percentage of time clicked on: ' + allImg.imageArray[i].generatePercentage + '.');
+    results.appendChild(list);
+  }
+  bigDiv.appendChild(resultHeader);
+  bigDiv.appendChild(results);
+  attemptButton.style.visibility = 'hidden';
+  resultButton.style.visibility = 'hidden';
+}
