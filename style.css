@@ -1,14 +1,41 @@
-img #leftImg {
-  width: 100px;
-  height: 100px;
+#leftImg {
+  float: left;
+  width: 10px;
+  height: 10px;
+  overflow: hidden;
 }
 
-img #midImg {
-  width: 100px;
-  height: 100px;
+#leftImg Img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
 }
 
-img #rightImg {
+#midImg {
+
   width: 100px;
   height: 100px;
+  overflow: hidden;
+}
+
+#midImg Img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
+#rightImg {
+
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+#rightImg Img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
 }
